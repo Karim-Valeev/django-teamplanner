@@ -1,0 +1,126 @@
+{% extends "../account_pages/base.html" %}
+{% block title %} {{board.board_title}} {% endblock %}
+{% block board %}
+    <div class="board-title-block main-padding">
+        <h3>
+            {{board.board_title}}
+            <div class="dropdown show" style="display: inline-block;">
+                <a class="btn btn-link settings-link" href="#" role="button" id="dropdownSettingsBoard" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownSettingsBoard">
+                    <a class="dropdown-item" href="/boards/edit_board/{{board.id}}">Edit board <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a class="dropdown-item" href="/boards/delete_board/{{board.id}}"
+                       onclick="return confirm('Are you sure you want to delete a board \'{{board.board_title}}\'')">
+                        Delete board <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <a class="btn btn-primary" href="/columns/create_column/{{board.id}}">Create new column</a>
+            <a class="btn btn-primary" href="/boards/invite_user/{{board.id}}/">Add user to the board</a>
+            <span style="font-size: 17px; font-weight: 400;padding-left: 20px">
+                <b>Members:</b>
+                {% for user in board.users.all %}
+                    {{user.username}}
+                {% endfor %}
+            </span>
+        </h3>
+    </div>
+    <div class="columns-block main-padding">
+        {% for column in board.column.all %}
+            <div class="column-block">
+                <div class="column-title-block">
+                    <a class="column-title" href="#">{{column.column_title}}</a>
+                    <div class="dropdown show" style="display: inline-block;">
+                        <a class="settings-link" href="#" role="button" id="dropdownSettingsColumn" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownSettingsColumn">
+                            <a class="dropdown-item" href="columns/edit_column/{{column.id}}/{{board.id}}">Edit column <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a class="dropdown-item" href="columns/delete_column/{{column.id}}/{{board.id}}"
+                               onclick="return confirm('Are you sure you want to delete a column \'{{column.column_title}}\'')">
+                                Delete column <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                            <a class="dropdown-item" href="tasks/create_task/{{column.id}}/{{board.id}}">
+                                Create new task <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-content">
+                    {% for task in column.task.all %}
+                        <a class="task-title {% if task.is_completed %}completed-task{% endif %}" href="#"
+                           onclick="showTaskInfo({'title': '{{task.title}}', 'author':'{{task.author}}',
+                           'pub_date':'{{task.pub_date}}', 'lead_time':'{{task.lead_time}}',
+                           'work_id': '{{task.id}}/{{column.id}}/{{board.id}}', 'is_completed': '{{task.is_completed}}',
+                           'description': '{{task.description}}', 'id_for_add_comments': '{{task.id}}/{{board.id}}'})">
+                            {{task.title}}
+                            <div class="task-date">до {{task.lead_time}}</div>
+
+<!--                            <a href="/tasks/leave_comment/{{task.id}}/{{board.id}}" role="button" class="btn btn-info btn-new-task">Дуфму сщььуте-->
+<!--                            </a>-->
+
+                        </a>
+                    {% endfor %}
+                    <a href="tasks/create_task/{{column.id}}/{{board.id}}" role="button" class="btn btn-info btn-new-task">Create new task</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% load static %}
+    <script src="{% static 'js/taskInfo.js' %}"></script>
+
+    <div id="taskModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Task title</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h6 class="bg-info text-center text-light lead_time">до 21 июля 2020</h6>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h6>Описание</h6>
+                            <p class="text-secondary description"></p>
+<!--                            <h6>Комментарии</h6>-->
+<!--                            <p>-->
+<!--                                <form action="/tasks/leave_comment/{{task.id}}/{{column.id}}/{{board.id}}" class="form" method="post">-->
+<!--                                    {% csrf_token %}-->
+<!--                                    <div class="form-group">-->
+<!--                                        <textarea name="text" class="form-control" placeholder="Ваш комментарий" rows="3"></textarea>-->
+<!--                                    </div>-->
+<!--                                    <div class="text-right">-->
+
+
+<!--&lt;!&ndash;                                          <a href="tasks/leave_comment/{{task.id}}/{{board.id}}"><input type="submit"  class="btn btn-primary"></a>&ndash;&gt;-->
+<!--                                        <button type="submit" class="btn btn-primary">Отправить</button>-->
+
+<!--                                    </div>-->
+<!--                                </form>-->
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h6>Автор</h6>
+                            <p><a class="primary-link author" href="#"></a></p>
+                            <h6>Дата создания</h6>
+                            <p class="pub_date">16.06.2019</p>
+                            <hr>
+                            <p class="text-center">
+                                <a href="#" role="button" class="btn btn-link complete-link">Mark as completed</a>
+                            </p>
+                            <hr>
+                            <p>
+                                <a href="tasks/edit_task/{{task.id}}/{{column.id}}/{{board.id}}" role="button" class="btn btn-dark edit">Редактировать</a>
+                            </p>
+                            <a href="tasks/delete_task/{{task.id}}/{{column.id}}/{{board.id}}" role="button" class="btn btn-danger delete">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

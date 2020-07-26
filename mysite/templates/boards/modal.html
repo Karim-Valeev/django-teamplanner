@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../static/css/main.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#taskModal">test</button>
+
+        <!--MODAL-->
+        <div id="taskModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Task title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h6 class="bg-info text-center text-light">до 21 июля 2020</h6>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h6>Описание</h6>
+                                <p class="text-secondary">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet aliquet urna, ac elementum dolor. Morbi tincidunt nec est commodo commodo. Vivamus mauris lorem, maximus ut arcu ac, commodo iaculis magna.
+                                </p>
+                                <h6>Комментарии</h6>
+                                <p>
+                                    <form class="form" method="post">
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Ваш комментарий" rows="3"></textarea>
+                                        </div>
+                                        <div class="text-right">
+                                            <input type="submit" class="btn btn-primary">
+                                        </div>
+                                    </form>
+                                </p>
+                                <div class="comment">
+                                    <h6><a href="#" class="primary-link">@kalim</a></h6>
+                                    <p class="text-secondary">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </p>
+                                </div>
+                                <div class="comment">
+                                    <h6><a href="#" class="primary-link">@login</a></h6>
+                                    <p class="text-secondary">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h6>Участники</h6>
+                                <a class="primary-link" href="#">@kalim</a><br>
+                                <a class="primary-link" href="#">@login</a>
+                                <hr>
+                                <a href="#" role="button" class="btn btn-danger">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+        <!--/MODAL-->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

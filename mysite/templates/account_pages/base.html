@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}Site{% endblock %}</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-sm main-padding" id="menuheader">
+				<a class="navbar-brand" href="#">
+					<img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<img src="{% static 'img/hamburger.jpg' %}" class="navbar-toggler-icon">
+				</button>
+				<!-- Links -->
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/">Home</a>
+						</li>
+						{% if user.is_authenticated %}
+							<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropBoards" data-toggle="dropdown">Boards</a>
+							<div class="dropdown-menu">
+								{% for board in user.boards.all %}
+									<a class="dropdown-item" href="{% url 'boards:detail' board.id %}">{{board.board_title}}</a>
+								{% endfor %}
+								<a class="dropdown-item highlighted" href="/boards/create_board ">Create new board</a>
+							</div>
+						</li>
+						{% endif %}
+<!--						{% if task_list %}-->
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropTasks" data-toggle="dropdown">Tasks</a>
+								<div class="dropdown-menu">
+								{% for column in board.column.all %}
+									{% for task in column.task.all %}
+									<a class="dropdown-item" href="">{{task}}</a>
+									{% endfor %}
+								{% endfor %}
+								</div>
+							</li>
+<!--						{% endif %}-->
+					</ul>
+					<ul class="navbar-nav">
+						{% if user.is_authenticated %}
+								<li class="nav-item">
+									<a class="nav-link" href="/logout">Log out</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/">{{user.username}}</a>
+								</li>
+						{% else %}
+								<li class="nav-item">
+									<a class="nav-link" href="/login">Log in</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/register">Sign up</a>
+								</li>
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+		</header>
+		{% if not board %}
+			<div class="container">
+				<div id="content" name="content" class="main">
+					{% if user.is_authenticated %}
+						<h1 class="mt-2">{{user.username}}</h1>
+						<hr class="mt-0">
+					{% endif %}
+					{% block content %}
+						<!-- For some staff -->
+					{% endblock %}
+				</div>
+			</div>
+		{% else %}
+			{% block board %}
+			{% endblock %}
+		{% endif %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
+</html>
