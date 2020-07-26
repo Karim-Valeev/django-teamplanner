@@ -1,1 +1,1 @@
-# TeamPlanner
+# My first Django app
