@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'boards.apps.BoardsConfig',
-    'tasks.apps.TasksConfig',
+    'boards',
+    'tasks',
     'columns.apps.ColumnsConfig',
     'register.apps.RegisterConfig',
     'crispy_forms',
@@ -132,10 +132,15 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIR = [
+    # "/home/pain/Desktop/django-teamplanner/mysite/static",
+
+    os.path.join(BASE_DIR, "../../static/"),
     os.path.join(BASE_DIR, "mysite/static/"),
+    os.path.join(BASE_DIR, "/static/"),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Сюда должна вся статика собраться
+STATIC_ROOT = os.path.join(BASE_DIR, "src/staticfiles")
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 

@@ -16,6 +16,8 @@ Including another URLconf
 import django
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS
@@ -31,4 +33,4 @@ urlpatterns = [
 
     path('', include('account_pages.urls')),
     path('', include('django.contrib.auth.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

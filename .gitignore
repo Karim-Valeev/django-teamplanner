@@ -113,6 +113,6 @@ media/
 !**/migrations/__init__.py
 
 # Custom:
-staticfiles/
+src/staticfiles/
 .idea/
 
