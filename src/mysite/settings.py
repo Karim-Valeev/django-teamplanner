@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'av*kw#6ha)1#l6rcx$2t9e^-jz9hj2p=fl#wqq09a71=+==&a3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://django-teamplanner.herokuapp.com/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
