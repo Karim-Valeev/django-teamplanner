@@ -1,0 +1,38 @@
+{% extends 'account_pages/base.html' %}
+{% block title %} TeamPlanner {% endblock %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <p>
+            <a class="btn btn-primary" href="/boards/create_board">Create new board</a>
+        </p>
+        <h3>Your boards</h3>
+        {% if user.boards %}
+            {% for board in user.boards.all %}
+                <a class="dropdown-item item-list" href="{% url 'boards:detail' board.id%}">{{board.board_title}}</a>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                Not Found. Create your first board!
+            </div>
+        {% endif %}
+        <br>
+
+        {% else %}
+            <h3 class="text-center">Welcome to the TeamPlanner!</h3>
+            <br>
+            <p class="text-center">
+                <img src="http://127.0.0.1:8000/static/img/logo.png">
+            </p>
+            <br>
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <a href="/login" role="button" class="btn btn-primary" style="width:100%">Log in</a>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <a href="/register" role="button" class="btn btn-primary" style="width:100%">Sign up</a>
+                </div>
+            </div>
+    {% endif %}
+
+{% endblock %}

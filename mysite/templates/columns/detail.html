@@ -1,0 +1,16 @@
+{% extends "../account_pages/base.html" %}
+{% block title %} {{column.column_title}} {% endblock %}
+{% block content %}
+    <h4>{{column.column_title}}</h4>
+    <hr>
+    {% for task in task_list %}
+        <a class="dropdown-item" href="tasks/{{task.id}}">{{task.title}}</a>
+        <!--Сделать зачеркивание при нажатии на таск-->
+        <button><a href="  ">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
+        <button><a href="  ">Delete</a></button>
+    {% endfor %}
+    <hr>
+    <br>
+        <a class="nav-link" href="/create_task">Create new task</a>
+
+{% endblock %}

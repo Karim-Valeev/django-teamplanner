@@ -1,0 +1,19 @@
+{% extends "../account_pages/base.html" %}
+{% block title %} {{task.title}} {% endblock %}
+{% block content %}
+    <h4>{{task.title}}</h4>
+    <h4>{{task.author}}</h4>
+    <h4>{{task.pub_date}}</h4>
+<!--    <h4>{{task.lead_time}}</h4>-->
+    <hr>
+    {% for comment in task.comment.all %}
+        <a class="dropdown-item" href="comments/{{comment.id}}">{{comment.title}}</a>
+        <!--Сделать зачеркивание при нажатии на таск-->
+        <button><a href="  ">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
+        <button><a href="  ">Delete</a></button>
+    {% endfor %}
+    <hr>
+    <br>
+        <a class="nav-link" href="/create_comment">Create new comment</a>
+
+{% endblock %}
