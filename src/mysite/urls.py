@@ -13,24 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import django
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls),
-    path('boards/', include('boards.urls')),
-    path('columns/', include('columns.urls')),
-    path('tasks/', include('tasks.urls')),
-    path('register/', include('register.urls')),
-
-    path('create_board/', include('boards.urls')),
-    path('create_task/', include('tasks.urls')),
-    path('create_column/<int:board_id>/', include('columns.urls')),
-
-    path('', include('account_pages.urls')),
     path('', include('django.contrib.auth.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('', include('main.urls')),
+    # path('create_board/', include('boards.urls')),
+    # path('create_task/', include('tasks.urls')),
+    # path('create_column/<int:board_id>/', include('columns.urls')),
+    #
+    # path('', include('account_pages.urls')),
+
+]
+# from django.conf.urls.static import static
+#
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

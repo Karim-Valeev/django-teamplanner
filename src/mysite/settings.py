@@ -16,8 +16,6 @@ import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.dirname(__file__)
-sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,10 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'boards',
-    'tasks',
-    'columns.apps.ColumnsConfig',
-    'register.apps.RegisterConfig',
+    'main',
     'crispy_forms',
 ]
 
@@ -64,9 +59,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(PROJECT_ROOT, 'templates')
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,16 +124,16 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+# Сюда должна вся статика собраться
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 STATICFILES_DIR = [
     # "/home/pain/Desktop/django-teamplanner/mysite/static",
-
-    os.path.join(BASE_DIR, "../../static/"),
-    os.path.join(BASE_DIR, "mysite/static/"),
-    os.path.join(BASE_DIR, "/static/"),
+    #
+    # os.path.join(BASE_DIR, "../../static/"),
+    # os.path.join(BASE_DIR, "mysite/static/"),
+    # os.path.join(BASE_DIR, "/static/"),
 ]
-
-# Сюда должна вся статика собраться
-STATIC_ROOT = os.path.join(BASE_DIR, "src/staticfiles")
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
