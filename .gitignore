@@ -84,7 +84,7 @@ celerybeat-schedule
 .env
 
 # virtualenv
-.venv
+.venv/
 venv/
 ENV/
 .vscode
@@ -112,6 +112,7 @@ media/
 !**/migrations
 !**/migrations/__init__.py
 
-
+# Custom:
+staticfiles/
 .idea/
 

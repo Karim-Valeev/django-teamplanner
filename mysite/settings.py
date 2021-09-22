@@ -29,7 +29,7 @@ SECRET_KEY = 'av*kw#6ha)1#l6rcx$2t9e^-jz9hj2p=fl#wqq09a71=+==&a3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -129,13 +129,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/boards"),
-    os.path.join(PROJECT_ROOT, 'static')
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, "mysite/static/"),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
