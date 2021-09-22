@@ -21,13 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('', include('main.urls')),
-    # path('create_board/', include('boards.urls')),
-    # path('create_task/', include('tasks.urls')),
-    # path('create_column/<int:board_id>/', include('columns.urls')),
-    #
-    # path('', include('account_pages.urls')),
-
 ]
-# from django.conf.urls.static import static
-#
-# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

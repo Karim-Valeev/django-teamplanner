@@ -30,7 +30,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropBoards" data-toggle="dropdown">Boards</a>
 							<div class="dropdown-menu">
 								{% for board in user.boards.all %}
-									<a class="dropdown-item" href="{% url 'boards:detail' board.id %}">{{board.board_title}}</a>
+									<a class="dropdown-item" href="{% url 'board_detail' board.id %}">{{board.board_title}}</a>
 								{% endfor %}
 								<a class="dropdown-item highlighted" href="/boards/create_board ">Create new board</a>
 							</div>

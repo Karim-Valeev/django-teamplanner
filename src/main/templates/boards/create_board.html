@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
         <h4 class="text-center">Create new/edit board:</h4>
-        <form method="POST">
+        <form method="POST" action="{% url 'create_board' %}">
             {% csrf_token %}
 	        {{form|crispy}}
             <button type="submit" class="btn btn-success">Save</button>

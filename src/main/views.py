@@ -13,6 +13,8 @@ def main(request):
 
 
 """ Board views """
+
+
 @login_required(login_url='/login')
 def board_detail(request, board_id):
     board = Board.objects.get(id=board_id)
@@ -87,6 +89,8 @@ def invite_user(request, board_id):
 
 
 """ Column views """
+
+
 @login_required(login_url='/login')
 def column_detail(request, column_id, board_id):
     a = Column.objects.get(id=column_id)
@@ -144,6 +148,8 @@ def edit_column(request, column_id, board_id):
 
 
 """ Registration """
+
+
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -155,13 +161,15 @@ def register(request):
                                 )
             login(request, user)
             form.save()
-            return render(request, "account_pages/home.html", {})
+            return redirect("/")
     else:
         form = RegisterForm()
     return render(request, "register/register.html", {"form": form})
 
 
 """ Task views """
+
+
 @login_required(login_url='/login')
 def create_task(request, column_id, board_id):
     if request.method == "POST":
@@ -228,10 +236,7 @@ def complete_task(request, task_id, column_id, board_id):
     else:
         return render(request, "account_pages/warning.html")
 
-
 # @login_required(login_url='/login')
 # def leave_comment(request, task_id, board_id):
 #     task = Task.objects.get(id=board_id)
 #     task.comment_set.create(author=request.user, comment_text="jgfj")
-
-
